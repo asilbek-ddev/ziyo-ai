@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Poppins } from "next/font/google";
 import Script from "next/script";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from "@/components/theme-provider";
+import "./globals.css";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
-const inter = Inter({
-  variable: "--font-inter",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -72,26 +76,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} antialiased`}>
-        {children}
-        <Script
-          id="ziyo-ai-schema"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              name: "Ziyo-Ai",
-              applicationCategory: "ArtificialIntelligenceApplication",
-              operatingSystem: "Web",
-              description:
-                "Ziyo-Ai — O‘zbek tilidagi sun’iy intellekt platformasi.",
-              url: "https://ziyo-ai.vercel.app",
-            }),
-          }}
-        />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${poppins.className} font-sans antialiased`}>
+        <ThemeProvider
+          attribute={"class"}
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarTrigger className="m-2.5 cursor-pointer" />
+            <TooltipProvider> {children}</TooltipProvider>
+            <Script
+              id="ziyo-ai-schema"
+              type="application/ld+json"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "SoftwareApplication",
+                  name: "Ziyo-Ai",
+                  applicationCategory: "ArtificialIntelligenceApplication",
+                  operatingSystem: "Web",
+                  description:
+                    "Ziyo-Ai — O‘zbek tilidagi sun’iy intellekt platformasi.",
+                  url: "https://ziyo-ai.vercel.app",
+                }),
+              }}
+            />
+          </SidebarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
