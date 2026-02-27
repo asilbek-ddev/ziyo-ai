@@ -77,7 +77,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.className} font-sans antialiased`}>
+      <body
+        className={`${poppins.className} font-sans select-none antialiased`}
+      >
         <ThemeProvider
           attribute={"class"}
           defaultTheme="system"
@@ -86,8 +88,7 @@ export default function RootLayout({
         >
           <SidebarProvider>
             <AppSidebar />
-            <SidebarTrigger className="m-2.5 cursor-pointer" />
-            <TooltipProvider> {children}</TooltipProvider>
+            <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
             <Script
               id="ziyo-ai-schema"
               type="application/ld+json"
