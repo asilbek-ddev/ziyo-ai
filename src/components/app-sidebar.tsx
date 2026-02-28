@@ -80,7 +80,7 @@ export function AppSidebar() {
           className="h-13 flex items-center justify-baseline rounded-none w-full gap-0 p-2.5 cursor-pointer"
         >
           <div className="h-7 w-7 rounded-full bg-green-600 flex items-center justify-center">
-            AE
+            
           </div>
         </Button>
       </SidebarFooter>
