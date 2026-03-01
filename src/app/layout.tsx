@@ -4,7 +4,7 @@ import Script from "next/script";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 
 const poppins = Poppins({
@@ -16,25 +16,29 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ziyo-Ai | Sun'iy Intellect Platformasi",
-    template: "%s | Ziyo-Ai",
+    default: "Zeka Ai | Sun'iy Intellekt Platformasi",
+    template: "%s | Zeka Ai",
   },
   description:
-    "Ziyo-Ai — sun’iy intellekt asosidagi zamonaviy platforma. AI yordamida tezkor javoblar, kontent yaratish, kod yozish va biznes avtomatlashtirish imkoniyatlarini taqdim etadi. Ziyo-Ai bilan samarali va innovatsion yechimlarga erishing.",
+    "Zeka Ai — O‘zbek tilidagi eng ilg‘or sun’iy intellekt platformasi. ChatGPT o‘zbekcha, tezkor javoblar, kontent yaratish, kod yozish va biznes jarayonlarini avtomatlashtirish imkoniyatlari. Zeka Ai bilan samaradorlikni oshiring va innovatsiyalarga erishing.",
   keywords: [
-    "Ziyo AI",
+    "Zeka Ai",
+    "ZekaAI",
     "Suniy intellekt",
-    "AI Uzbekistan",
-    "ChatGPT O'zbekcha",
-    "AI platforma",
+    "AI O'zbekiston",
+    "ChatGPT o'zbekcha",
+    "Suniy intellekt platformasi",
+    "AI chat",
     "O'zbek AI",
     "Suniy intellekt yordamchi",
+    "Kod yozish AI",
+    "Kontent yaratish AI",
+    "Business automation AI",
+    "Artificial intelligence Uzbekistan",
   ],
-
-  authors: [{ name: "Ziyo-Ai Team", url: "https://ziyo-ai.vercel.app" }],
-  creator: "Ziyo-Ai Team",
-  publisher: "Ziyo-Ai Team",
-
+  authors: [{ name: "Zeka Ai Team", url: "https://zekai.vercel.app" }],
+  creator: "Zeka Ai Team",
+  publisher: "Zeka Ai Team",
   robots: {
     index: true,
     follow: true,
@@ -48,25 +52,32 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-
   alternates: {
-    canonical: "https://ziyo-ai.vercel.app",
+    canonical: "https://zekai.vercel.app",
   },
-
   openGraph: {
-    title: "Ziyo-Ai | Sun’iy Intellekt Platformasi",
+    title: "Zeka Ai | Sun’iy Intellekt Platformasi",
     description:
-      "Ziyo-Ai — O‘zbek tilidagi sun’iy intellekt platformasi. AI yordamida kontent, kod va biznes jarayonlarini avtomatlashtiring.",
-    url: "https://ziyo-ai.vercel.app",
-    siteName: "Ziyo-Ai",
+      "Zeka Ai — O‘zbek tilidagi sun’iy intellekt platformasi. AI yordamida kontent, kod va biznes jarayonlarini avtomatlashtiring.",
+    url: "https://zekai.vercel.app",
+    siteName: "Zeka Ai",
     images: [
       {
-        url: "https://ziyo-ai.vercel.app",
-        alt: "Ziyo-Ai Sun’iy Intellekt Platformasi",
+        url: "https://zekai.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Zeka Ai Sun’iy Intellekt Platformasi",
       },
     ],
-    locale: "en_US",
+    locale: "uz_UZ",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Zeka Ai | Sun’iy Intellekt Platformasi",
+    description:
+      "O‘zbek tilidagi sun’iy intellekt platformasi — tezkor javoblar, kontent va kod yaratish.",
+    images: ["https://zekai.vercel.app/og-image.png"],
   },
 };
 
@@ -76,12 +87,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${poppins.className} font-sans select-none antialiased`}
-      >
+    <html lang="uz" suppressHydrationWarning>
+      <body className={`${poppins.variable} font-sans antialiased`}>
         <ThemeProvider
-          attribute={"class"}
+          attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
@@ -90,19 +99,28 @@ export default function RootLayout({
             <AppSidebar />
             <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
             <Script
-              id="ziyo-ai-schema"
+              id="zekai-schema"
               type="application/ld+json"
               strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: JSON.stringify({
                   "@context": "https://schema.org",
                   "@type": "SoftwareApplication",
-                  name: "Ziyo-Ai",
+                  name: "Zeka Ai",
                   applicationCategory: "ArtificialIntelligenceApplication",
-                  operatingSystem: "Web",
+                  operatingSystem: "Web Browser",
                   description:
-                    "Ziyo-Ai — O‘zbek tilidagi sun’iy intellekt platformasi.",
-                  url: "https://ziyo-ai.vercel.app",
+                    "Zeka Ai — O‘zbek tilidagi sun’iy intellekt platformasi. Chat, kontent yaratish va biznes avtomatlashtirish.",
+                  url: "https://zekai.vercel.app",
+                  author: {
+                    "@type": "Organization",
+                    name: "Zeka Ai Team",
+                  },
+                  offers: {
+                    "@type": "Offer",
+                    price: "0",
+                    priceCurrency: "USD",
+                  },
                 }),
               }}
             />
