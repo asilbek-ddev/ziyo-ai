@@ -1,44 +1,52 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
-import Script from "next/script";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Poppins, Geist } from "next/font/google";
 import "./globals.css";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
+import SeoSchema from "@/components/SeoSchema";
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+export const poppins = Poppins({
   subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sflow.uz"),
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
+
   title: {
-    default: "Zeka Ai | Sun'iy Intellekt Platformasi",
-    template: "%s | Zeka Ai",
+    default: "SFlow — Social Media Automation Platform",
+    template: "%s | SFlow",
   },
   description:
-    "Zeka Ai — O‘zbek tilidagi eng ilg‘or sun’iy intellekt platformasi. ChatGPT o‘zbekcha, tezkor javoblar, kontent yaratish, kod yozish va biznes jarayonlarini avtomatlashtirish imkoniyatlari. Zeka Ai bilan samaradorlikni oshiring va innovatsiyalarga erishing.",
+    "SFlow is a powerful social media automation platform that helps you schedule posts, manage multiple accounts, analyze performance, and grow your audience across all major social networks.",
   keywords: [
-    "Zeka Ai",
-    "ZekaAI",
-    "Suniy intellekt",
-    "AI O'zbekiston",
-    "ChatGPT o'zbekcha",
-    "Suniy intellekt platformasi",
-    "AI chat",
-    "O'zbek AI",
-    "Suniy intellekt yordamchi",
-    "Kod yozish AI",
-    "Kontent yaratish AI",
-    "Business automation AI",
-    "Artificial intelligence Uzbekistan",
+    "social media automation",
+    "social media scheduler",
+    "instagram automation",
+    "facebook automation",
+    "tiktok automation",
+    "youtube automation",
+    "telegram automation",
+    "social media management tool",
+    "social media analytics",
+    "content scheduling platform",
+    "marketing automation",
+    "SFlow social media tool",
   ],
-  authors: [{ name: "Zeka Ai Team", url: "https://zekai.vercel.app" }],
-  creator: "Zeka Ai Team",
-  publisher: "Zeka Ai Team",
+  authors: [{ name: "SFlow Team" }],
+  creator: "SFlow",
+  publisher: "SFlow",
   robots: {
     index: true,
     follow: true,
@@ -46,39 +54,40 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: "https://zekai.vercel.app",
-  },
   openGraph: {
-    title: "Zeka Ai | Sun’iy Intellekt Platformasi",
+    title: "SFlow — Social Media Automation Platform",
     description:
-      "Zeka Ai — O‘zbek tilidagi sun’iy intellekt platformasi. AI yordamida kontent, kod va biznes jarayonlarini avtomatlashtiring.",
-    url: "https://zekai.vercel.app",
-    siteName: "Zeka Ai",
+      "Automate your social media workflow with SFlow. Schedule posts, manage multiple accounts, analyze performance, and grow faster.",
+    url: "https://sflow.uz",
+    siteName: "SFlow",
     images: [
       {
-        url: "https://zekai.vercel.app/og-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Zeka Ai Sun’iy Intellekt Platformasi",
+        alt: "SFlow Social Media Automation Platform",
       },
     ],
-    locale: "uz_UZ",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zeka Ai | Sun’iy Intellekt Platformasi",
+    title: "SFlow — Social Media Automation Platform",
     description:
-      "O‘zbek tilidagi sun’iy intellekt platformasi — tezkor javoblar, kontent va kod yaratish.",
-    images: ["https://zekai.vercel.app/og-image.png"],
+      "Manage and automate all your social media accounts in one place with SFlow.",
+    images: ["/og-image.png"],
+    creator: "@sflow",
   },
+  alternates: {
+    canonical: "https://sflow.uz",
+  },
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -87,44 +96,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" suppressHydrationWarning>
-      <body className={`${poppins.variable} font-sans antialiased`}>
+    <html lang="en" className={cn("font-sans")} suppressHydrationWarning>
+      <body className={`${poppins.variable} antialiased`}>
+        <SeoSchema />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarProvider>
-            <AppSidebar />
-            <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
-            <Script
-              id="zekai-schema"
-              type="application/ld+json"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "SoftwareApplication",
-                  name: "Zeka Ai",
-                  applicationCategory: "ArtificialIntelligenceApplication",
-                  operatingSystem: "Web Browser",
-                  description:
-                    "Zeka Ai — O‘zbek tilidagi sun’iy intellekt platformasi. Chat, kontent yaratish va biznes avtomatlashtirish.",
-                  url: "https://zekai.vercel.app",
-                  author: {
-                    "@type": "Organization",
-                    name: "Zeka Ai Team",
-                  },
-                  offers: {
-                    "@type": "Offer",
-                    price: "0",
-                    priceCurrency: "USD",
-                  },
-                }),
-              }}
-            />
-          </SidebarProvider>
+          <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

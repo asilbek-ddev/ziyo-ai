@@ -1,12 +1,26 @@
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    return [
-        {
-            url: "https://zekai.vercel.app",
-            lastModified: new Date(),
-            changeFrequency: "daily",
-            priority: 1,
-        }
-    ]
+  const baseUrl = "https://sflow.uz";
+
+  return [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/pricing`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/features`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    }
+  ];
 }
